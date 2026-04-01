@@ -6,9 +6,11 @@ Draw floating 3D strokes in augmented reality using just your bare hand. No styl
 
 ## Demo
 
-> Add a screenshot or screen-recording GIF here before publishing.
-> Drop the file in this folder and replace this line with:
-> `![AR Drawing Demo](demo.gif)`
+
+
+https://github.com/user-attachments/assets/d8200f83-5f47-40b7-a0d5-3489e7b470df
+
+
 
 ---
 
