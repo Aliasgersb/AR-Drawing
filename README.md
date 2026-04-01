@@ -86,9 +86,9 @@ The MediaPipe package is stored locally in `LocalPackages/com.github.homuler.med
 
 ## Author
 
-**[Your Name]**
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- LinkedIn: [your-linkedin](https://linkedin.com/in/YOUR_PROFILE)
+**Aliasger Bhabhrawala**
+- GitHub: https://github.com/Aliasgersb
+- LinkedIn: www.linkedin.com/in/aliasger-bhabhrawala
 
 ---
 
