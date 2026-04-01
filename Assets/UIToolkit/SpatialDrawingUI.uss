@@ -1,0 +1,1437 @@
+/* ==============================================
+   SPATIAL DRAWING — UI TOOLKIT STYLESHEET
+   Figma-matched design · Light theme
+   Scaled for 1080×2400 phone resolution
+   ============================================== */
+
+/* ── ROOT ── */
+.root {
+    flex-grow: 1;
+    background-color: transparent;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Regular.ttf");
+    -unity-font-definition: initial;
+}
+
+/* ── SCREEN (shared) ── */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ── UTILITY ── */
+.spacer {
+    flex-grow: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ══════════════════════════════════
+   ONBOARDING SCREEN
+   ══════════════════════════════════ */
+/* ── SCREEN ROOT ── */
+.onboarding {
+    /* Deep, atmospheric gradient is handled by bg-gradient PNG */
+    background-color: #F5E6F0;   /* fallback: warm rose, rarely seen */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ── BACKGROUND ── */
+.ob__bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    background-image: url("Images/bg-gradient.png");
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+/* ══════════════════════════════════
+   HERO COMPOSITION
+   All elements use position:absolute
+   inside ob__hero-space
+   ══════════════════════════════════ */
+
+.ob__hero-space {
+    position: absolute;
+    top: 120px;
+    left: 0; right: 0;
+    width: 100%;
+    height: 760px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Legacy container — hidden, name kept for C# */
+.ob__hero-svg-container {
+    display: none;
+}
+
+/* ── AMBIENT GLOW ORBS (behind arcs) ── */
+.ob__hero-glow {
+    position: absolute;
+    width: 640px;
+    height: 640px;
+    border-radius: 320px;
+    /* Soft warm rose glow layered on the gradient */
+    background-color: rgba(255, 180, 200, 0.22);
+    top: 60px;
+    left: 50%;
+    translate: -320px 0;
+}
+
+/* ══════════════════════════════════
+   ARC RINGS
+   Technique: each "arc-clip" is a
+   small viewport. Inside it sits a
+   full-size circle (ob__arc) that
+   is larger than the clip box so
+   only an arc edge peeks through.
+   Rotation is applied on the clip.
+   ══════════════════════════════════ */
+
+/* Shared arc clip container */
+.ob__arc-clip {
+    position: absolute;
+    overflow: hidden;
+}
+
+/* Shared ring (full circle with thick border, transparent fill) */
+.ob__arc {
+    position: absolute;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+/* ─ ARC 1 · Deep purple · large, centre-left ─ */
+.ob__arc-clip--1 {
+    width: 560px;
+    height: 560px;
+    top: 80px;
+    left: 50%;
+    translate: -360px 0;
+    rotate: -22deg;
+}
+.ob__arc-clip--1 .ob__arc {
+    width: 520px;
+    height: 520px;
+    top: 20px;
+    left: 20px;
+    border-width: 42px;
+    border-color: rgba(109, 40, 217, 0.80);  /* deep purple */
+}
+
+/* ─ ARC 2 · Coral pink · large, centre-right ─ */
+.ob__arc-clip--2 {
+    width: 520px;
+    height: 520px;
+    top: 160px;
+    left: 50%;
+    translate: -100px 0;
+    rotate: 28deg;
+}
+.ob__arc-clip--2 .ob__arc {
+    width: 480px;
+    height: 480px;
+    top: 20px;
+    left: 20px;
+    border-width: 38px;
+    border-color: rgba(244, 63, 94, 0.72);   /* coral pink */
+}
+
+/* ─ ARC 3 · Soft sky-blue · mid-size, upright ─ */
+.ob__arc-clip--3 {
+    width: 440px;
+    height: 440px;
+    top: 220px;
+    left: 50%;
+    translate: -280px 80px;
+    rotate: 8deg;
+}
+.ob__arc-clip--3 .ob__arc {
+    width: 400px;
+    height: 400px;
+    top: 20px;
+    left: 20px;
+    border-width: 32px;
+    border-color: rgba(56, 189, 248, 0.68);  /* sky blue */
+}
+
+/* ─ ARC 4 · Soft lavender · small accent ─ */
+.ob__arc-clip--4 {
+    width: 280px;
+    height: 280px;
+    top: 360px;
+    left: 50%;
+    translate: 80px 50px;
+    rotate: -40deg;
+}
+.ob__arc-clip--4 .ob__arc {
+    width: 260px;
+    height: 260px;
+    top: 10px;
+    left: 10px;
+    border-width: 24px;
+    border-color: rgba(167, 139, 250, 0.60); /* lavender */
+}
+
+/* ══════════════════════════════════
+   FLOATING GEOMETRIC SHAPES
+   ══════════════════════════════════ */
+
+/* Shared float base */
+.ob__float {
+    position: absolute;
+}
+
+/* Purple sphere (circle) — top-left area */
+.ob__float--sphere-purple {
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
+    background-color: rgba(124, 58, 237, 0.88);
+    top: 120px;
+    left: 50%;
+    translate: -380px 0;
+    /* subtle shadow via border */
+    border-width: 3px;
+    border-color: rgba(255, 255, 255, 0.30);
+}
+
+/* Coral orb — lower-right */
+.ob__float--sphere-coral {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background-color: rgba(244, 63, 94, 0.82);
+    top: 480px;
+    left: 50%;
+    translate: 230px 0;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Blue cube (square with subtle border) — right side */
+.ob__float--cube-blue {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+    background-color: rgba(56, 189, 248, 0.78);
+    top: 360px;
+    left: 50%;
+    translate: 300px -30px;
+    rotate: 18deg;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.32);
+}
+
+/* Small white dot accent */
+.ob__float--dot-white {
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    background-color: rgba(255, 255, 255, 0.90);
+    top: 200px;
+    left: 50%;
+    translate: 260px 60px;
+}
+
+/* Soft lavender dot */
+.ob__float--dot-lavender {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: rgba(192, 132, 252, 0.85);
+    top: 560px;
+    left: 50%;
+    translate: -310px 0;
+}
+
+/* ══════════════════════════════════
+   FEATURE PILLS  —  Frosted Glass
+   ══════════════════════════════════ */
+
+.ob__pills {
+    position: absolute;
+    top: 920px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ob__pill {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 26px 52px;
+    border-radius: 100px;
+    margin: 0 14px;
+    /* Frosted glass: semi-transparent white + subtle border */
+    background-color: rgba(255, 255, 255, 0.46);
+    border-width: 1.5px;
+    border-color: rgba(255, 255, 255, 0.72);
+    /* Depth via shadow simulation: thin dark bottom border only */
+}
+
+/* Icon glyph inside pill */
+.ob__pill-icon {
+    font-size: 32px;
+    margin-right: 14px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+
+.ob__pill-icon--indigo { color: #4F46E5; }
+.ob__pill-icon--orange { color: #EA580C; }
+.ob__pill-icon--purple { color: #7C3AED; }
+
+/* Label text */
+.ob__pill-text {
+    font-size: 34px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    color: #1E1B4B;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+/* Keep the individual pill colour accent on the icon, not bg */
+.ob__pill--indigo .ob__pill-text { color: #3730A3; }
+.ob__pill--purple .ob__pill-text { color: #6D28D9; }
+.ob__pill--orange .ob__pill-text { color: #C2410C; }
+
+/* ══════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════ */
+
+.ob__text-content {
+    /* Container changed to absolute since layout isn't flex-column anymore */
+    position: absolute;
+    top: 1050px;
+    left: 0; right: 0;
+    width: 100%;
+    align-items: center;
+}
+
+.ob__title {
+    width: 100%;
+    color: #1E1B4B;
+    font-size: 168px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_28pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    letter-spacing: -4px;
+    margin-top: 0;
+}
+
+.ob__subtitle {
+    width: 100%;
+    color: rgba(75, 65, 130, 0.80);
+    font-size: 48px;
+    -unity-text-align: middle-center;
+    padding: 0 140px;
+    margin-top: 80px; /* Provides the spacing from title */
+    white-space: normal;
+    word-spacing: 2px;
+}
+
+/* ══════════════════════════════════
+   CTA BUTTON  —  Premium Pill
+   ══════════════════════════════════ */
+
+.ob__cta-area {
+    position: absolute;
+    bottom: 100px;
+    left: 0; right: 0;
+    width: 100%;
+    padding: 0 80px;
+    align-items: stretch;
+    margin-top: 0;
+}
+
+.ob__cta {
+    width: 100%;
+    height: 186px;
+    border-radius: 93px;
+    /* Rich saturated purple */
+    background-color: #6D28D9;
+    /* Subtle top-highlight border for glass depth */
+    border-width: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-property: scale, background-color;
+    transition-duration: 180ms;
+}
+
+.ob__cta-text {
+    color: white;
+    font-size: 62px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_28pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.ob__cta:hover {
+    scale: 1.025;
+    background-color: #5B21B6;
+}
+
+.ob__cta:active {
+    scale: 0.96;
+    background-color: #4C1D95;
+}
+
+/* Legacy text class — keep for safety */
+.onboarding__cta-text {
+    color: white;
+    font-size: 52px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+
+/* ══════════════════════════════════
+   GALLERY SCREEN
+   ══════════════════════════════════ */
+.gallery {
+    background-color: #FAFAF9;
+    flex-direction: column;
+    padding: 0;
+}
+
+/* Gallery header */
+.gallery__header {
+    padding: 150px 66px 40px 66px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.gallery__back-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    border-width: 2px;
+    border-color: #E2E8F0;
+    transition-property: scale, background-color;
+    transition-duration: 150ms;
+}
+
+.gallery__back-btn:active {
+    scale: 0.95;
+    background-color: #F8FAFC;
+}
+
+.gallery__back-icon {
+    color: #1E293B;
+    font-size: 56px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.gallery__title {
+    color: #1E293B;
+    font-size: 96px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_28pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    white-space: nowrap;
+}
+
+/* Search bar */
+.gallery__search-wrap {
+    margin: 30px 66px 40px 66px;
+    height: 122px;
+    border-radius: 61px;
+    background-color: white;
+    border-width: 2px;
+    border-color: #E2E8F0;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 44px;
+    flex-shrink: 0;
+}
+
+.gallery__search-icon {
+    color: #94A3B8;
+    font-size: 48px;
+    margin-right: 26px;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+}
+
+.gallery__search-placeholder {
+    color: #94A3B8;
+    font-size: 40px;
+    flex-grow: 1;
+    -unity-text-align: middle-left;
+}
+
+/* Filter pills */
+.gallery__filters {
+    flex-direction: row;
+    padding: 0 66px;
+    margin-bottom: 40px;
+    flex-shrink: 0;
+}
+
+.filter-pill {
+    padding: 22px 52px;
+    border-radius: 50px;
+    margin-right: 20px;
+    background-color: #F1F5F9;
+    border-width: 2px;
+    border-color: #E2E8F0;
+    flex-shrink: 0;
+    transition-property: background-color, scale;
+    transition-duration: 120ms;
+}
+
+.filter-pill:hover {
+    background-color: #E2E8F0;
+}
+
+.filter-pill:active {
+    scale: 0.95;
+}
+
+.filter-pill--active {
+    background-color: #3B82F6;
+    border-color: #3B82F6;
+}
+
+.filter-pill__text {
+    font-size: 36px;
+    color: #475569;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+.filter-pill--active .filter-pill__text {
+    color: white;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+}
+
+/* Gallery scroll area */
+.gallery__scroll {
+    flex-grow: 1;
+}
+
+/* Card grid */
+.gallery__grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px 55px;
+    align-content: flex-start;
+}
+
+.gallery__card {
+    width: 47%;
+    margin: 1.5%;
+    margin-bottom: 44px;
+    flex-shrink: 0;
+}
+
+.gallery__card-image {
+    width: 100%;
+    height: 440px;
+    border-radius: 44px;
+    background-color: #E2E8F0;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Heart/favorite icon overlay */
+.gallery__card-fav {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 76px;
+    height: 76px;
+    border-radius: 38px;
+    background-color: rgba(255, 255, 255, 0.85);
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery__card-fav-icon {
+    color: #94A3B8;
+    font-size: 36px;
+    -unity-text-align: middle-center;
+}
+
+.gallery__card-title {
+    color: #1E293B;
+    font-size: 40px;
+    -unity-font-style: bold;
+    margin-top: 22px;
+    white-space: nowrap;
+}
+
+.gallery__card-date {
+    color: #94A3B8;
+    font-size: 32px;
+    margin-top: 6px;
+    white-space: nowrap;
+}
+
+/* Card Delete Button overlay absolute position triggers */
+.gallery__card-delete {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 68px;
+    height: 68px;
+    border-radius: 34px;
+    background-color: rgba(239, 68, 68, 0.9); /* Red tint */
+    align-items: center;
+    justify-content: center;
+    transition-property: scale, background-color;
+    transition-duration: 120ms;
+}
+
+.gallery__card-delete:hover {
+    background-color: rgb(220, 38, 38);
+    scale: 1.1;
+}
+
+.gallery__card-delete-icon {
+    color: white;
+    font-size: 28px;
+    -unity-text-align: middle-center;
+}
+
+/* Empty state */
+.gallery__empty {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 176px;
+}
+
+.gallery__empty-icon {
+    font-size: 130px;
+    color: #CBD5E1;
+    margin-bottom: 44px;
+    -unity-text-align: middle-center;
+}
+
+.gallery__empty-text {
+    color: #94A3B8;
+    font-size: 44px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+/* FAB button (New Drawing) */
+.gallery__fab {
+    position: absolute;
+    bottom: 88px;
+    right: 66px;
+    height: 138px;
+    border-radius: 69px;
+    background-color: #8B5CF6;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 66px;
+    flex-shrink: 0;
+    transition-property: scale, opacity, background-color;
+    transition-duration: 150ms;
+}
+
+.gallery__fab:hover {
+    background-color: #7C3AED;
+    scale: 1.05;
+}
+
+.gallery__fab:active {
+    background-color: #6D28D9;
+    scale: 0.95;
+    opacity: 0.9;
+}
+
+.gallery__fab-icon {
+    color: white;
+    font-size: 54px;
+    margin-right: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.gallery__fab-text {
+    color: white;
+    font-size: 44px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+
+/* ══════════════════════════════════
+   SETTINGS SCREEN
+   ══════════════════════════════════ */
+.settings {
+    background-color: transparent;
+    flex-direction: column;
+}
+
+/* Background wash blobs */
+/* Background wash blobs - REMOVED to match onboarding bg-gradient */
+.settings__bg-wash {
+    display: none;
+}
+
+/* Settings header */
+.settings__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 150px 66px 60px 66px;
+}
+
+.settings__back-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    margin-right: 44px;
+    flex-shrink: 0;
+    transition-duration: 150ms;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.settings__back-btn:hover {
+    background-color: #F1F5F9;
+}
+
+.settings__back-btn:active {
+    scale: 0.92;
+}
+
+.settings__back-label {
+    color: #334155;
+    font-size: 54px;
+    -unity-text-align: middle-center;
+    /* Ensure arrow is perfectly centered */
+    width: 100%;
+    margin-right: 4px;
+}
+
+.settings__title {
+    color: #1E293B;
+    font-size: 78px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_28pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    flex-shrink: 1;
+    white-space: normal;
+}
+
+/* Settings content */
+.settings__content {
+    flex-grow: 1;
+    padding: 0 66px;
+    overflow: hidden;
+}
+
+/* Section label */
+.settings__section-label {
+    color: #3F51B5;
+    font-size: 30px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Regular.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: normal;
+    letter-spacing: 5px;
+    margin-top: 55px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+/* Settings card (group of rows) */
+.settings__card {
+    background-color: white;
+    border-radius: 44px;
+    padding: 10px 55px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
+}
+
+/* Settings row (inside card) */
+.settings__row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 0;
+    border-bottom-width: 2px;
+    border-bottom-color: #F1F5F9;
+    flex-shrink: 0;
+}
+
+.settings__row--last {
+    border-bottom-width: 0;
+}
+
+.settings__row-info {
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin-right: 44px;
+}
+
+.settings__row-label {
+    color: #1E293B;
+    font-size: 44px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Regular.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: normal;
+    white-space: nowrap;
+    flex-shrink: 1;
+    margin-right: 20px;
+}
+
+.settings__row-sublabel {
+    color: #94A3B8;
+    font-size: 32px;
+    margin-top: 10px;
+}
+
+/* Slider row */
+.settings__slider-row {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 22px;
+    flex-shrink: 0;
+}
+
+.settings__slider-label {
+    color: #94A3B8;
+    font-size: 32px;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.settings__slider-label--right {
+    -unity-text-align: middle-right;
+}
+
+.settings__slider-track {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #E2E8F0;
+    border-radius: 5px;
+    margin: 0 30px;
+    flex-shrink: 0;
+}
+
+.settings__slider-fill {
+    height: 10px;
+    background-color: #3B82F6;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.settings__slider-thumb {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #3B82F6;
+    top: -17px;
+    left: 50%;
+    translate: -50% 0;
+    translate: -50% 0;
+}
+
+.settings__slider-dots-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings__slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: rgba(51, 65, 85, 0.4);
+}
+
+.settings__desc-label {
+    color: #3B82F6;
+    font-size: 28px;
+    -unity-font-style: normal;
+    margin-left: auto;
+    background-color: rgba(59, 130, 246, 0.1);
+    padding: 6px 16px;
+    border-radius: 12px;
+}
+
+/* Segmented control */
+.settings__segmented {
+    flex-direction: row;
+    background-color: #F1F5F9;
+    border-radius: 26px;
+    padding: 8px;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+.settings__segment {
+    padding: 22px 44px;
+    border-radius: 22px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0;
+    transition-property: background-color;
+    transition-duration: 120ms;
+}
+
+.settings__segment:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.settings__segment--active {
+    background-color: white;
+}
+
+.settings__segment--active:hover {
+    background-color: white;
+}
+
+.settings__segment-text {
+    font-size: 38px;
+    color: #64748B;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+.settings__segment--active .settings__segment-text {
+    color: #1E293B;
+    -unity-font-style: normal;
+}
+
+/* Toggle */
+.settings__toggle-track {
+    width: 132px;
+    height: 76px;
+    border-radius: 38px;
+    background-color: #CBD5E1;
+    flex-shrink: 0;
+    transition-property: background-color;
+    transition-duration: 150ms;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px;
+}
+
+.settings__toggle-track--on {
+    background-color: #3B82F6;
+}
+
+.settings__toggle-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background-color: white;
+    flex-shrink: 0;
+    transition-property: translate;
+    transition-duration: 150ms;
+}
+
+.settings__toggle-track--on .settings__toggle-thumb {
+    translate: 56px 0;
+}
+
+/* Toggle with checkmark */
+.settings__toggle-check {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings__toggle-check-icon {
+    color: white;
+    font-size: 32px;
+    -unity-text-align: middle-center;
+}
+
+/* How It Works button */
+.settings__how-btn {
+    margin: 55px 0 66px 0;
+    height: 130px;
+    border-radius: 65px;
+    background-color: rgba(59, 130, 246, 0.08);
+    border-width: 2px;
+    border-color: rgba(59, 130, 246, 0.25);
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition-property: background-color, scale;
+    transition-duration: 150ms;
+}
+
+.settings__how-btn:hover {
+    background-color: rgba(59, 130, 246, 0.13);
+}
+
+.settings__how-btn:active {
+    scale: 0.97;
+    background-color: rgba(59, 130, 246, 0.18);
+}
+
+.settings__how-text {
+    color: #3B82F6;
+    font-size: 42px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Regular.ttf");
+    -unity-font-definition: initial;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+/* ══════════════════════════════════
+   GESTURE GUIDE MODAL
+   ══════════════════════════════════ */
+
+/* Full-screen dimmed backdrop */
+.gesture-modal__overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Bottom sheet card */
+.gesture-modal__sheet {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    padding: 30px 66px 80px 66px;
+    flex-shrink: 0;
+}
+
+/* Drag handle pill at top */
+.gesture-modal__handle-bar {
+    width: 110px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #CBD5E1;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+/* Modal heading */
+.gesture-modal__title {
+    color: #1E293B;
+    font-size: 66px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_28pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    margin-bottom: 18px;
+}
+
+/* Modal subtitle */
+.gesture-modal__subtitle {
+    color: #64748B;
+    font-size: 36px;
+    white-space: normal;
+    margin-bottom: 44px;
+}
+
+/* A single gesture row */
+.gesture-modal__row {
+    flex-direction: row;
+    align-items: center;
+    padding: 28px 0;
+}
+
+/* Text block */
+.gesture-modal__row-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-left: 10px;
+}
+
+.gesture-modal__row-label {
+    color: #1E293B;
+    font-size: 42px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+.gesture-modal__row-sub {
+    color: #64748B;
+    font-size: 33px;
+    white-space: normal;
+}
+
+/* Thin divider line between rows */
+.gesture-modal__divider {
+    height: 2px;
+    background-color: #F1F5F9;
+    margin: 0;
+}
+
+/* Got it close button */
+.gesture-modal__close-btn {
+    margin-top: 54px;
+    height: 150px;
+    border-radius: 75px;
+    background-color: #1E293B;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition-property: background-color, scale;
+    transition-duration: 150ms;
+}
+
+.gesture-modal__close-btn:hover {
+    background-color: #334155;
+}
+
+.gesture-modal__close-btn:active {
+    scale: 0.97;
+    background-color: #0F172A;
+}
+
+.gesture-modal__close-text {
+    color: white;
+    font-size: 46px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: nowrap;
+}
+
+/* ══════════════════════════════════
+   MAIN HUD SCREEN (kept mostly as-is)
+   ══════════════════════════════════ */
+.mainhud {
+    background-color: transparent;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Top bar */
+.mainhud__top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 32px 20px 32px;
+}
+
+.mainhud__icon-btn {
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    /* ── Liquid glass body ── */
+    /* Base: cool slightly-lifted transparent frosted surface                  */
+    /* This colour is the visible result when the shader _CameraOpaqueTexture  */
+    /* is unavailable (Editor preview / non-URP). In AR it is overridden by    */
+    /* the blur. The cool tint reads as glass on any background.               */
+    background-color: transparent;
+    /* Hairline glass-edge border: top arc is the brightest (specular)         */
+    border-top-width:    1.5px;
+    border-right-width:  1px;
+    border-bottom-width: 1px;
+    border-left-width:   1px;
+    border-top-color:    rgba(255, 255, 255, 0.65);
+    border-right-color:  rgba(255, 255, 255, 0.22);
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+    border-left-color:   rgba(255, 255, 255, 0.22);
+    /* Smooth press response */
+    transition-property: background-color, scale;
+    transition-duration: 150ms;
+}
+
+/* Glass-effect class: assigns the blur shader material to the child bg layer */
+.glass-effect {
+    -unity-material: url('project://database/Assets/Shaders/CleanUIBlur.mat?fileID=2100000&type=2#CleanUIBlur');
+}
+
+/* Pressed: deepen the glass slightly without a harsh flash */
+.mainhud__icon-btn:active {
+    scale: 0.92;
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.mainhud__icon-image {
+    width: 60px;
+    height: 60px;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: white;
+}
+
+.gallery-icon {
+    background-image: resource("Icons/photo_48dp_E3E3E3_FILL0_wght400_GRAD0_opsz48");
+}
+
+.settings-icon {
+    background-image: resource("Icons/settings_48dp_E3E3E3_FILL0_wght400_GRAD0_opsz48");
+}
+
+/* Center reticle */
+.mainhud__reticle-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainhud__reticle {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.35);
+    background-color: transparent;
+    flex-shrink: 0;
+}
+
+/* Bottom dock */
+.mainhud__dock {
+    margin: 0 28px 52px 28px;
+    padding: 16px 20px;
+    background-color: rgba(8, 12, 28, 0.8);
+    border-radius: 36px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Color dots */
+.mainhud__colors {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.color-dot {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 0 5px;
+    border-width: 3px;
+    border-color: transparent;
+    flex-shrink: 0;
+    transition-property: scale, border-color;
+    transition-duration: 120ms;
+}
+
+.color-dot:hover {
+    scale: 1.15;
+}
+
+.color-dot:active {
+    scale: 0.88;
+}
+
+.color-dot--selected {
+    border-color: white;
+    scale: 1.1;
+}
+
+.color-dot--white  { background-color: #FFFFFF; }
+.color-dot--cyan   { background-color: #00B4D8; }
+.color-dot--orange { background-color: #FF9E2C; }
+.color-dot--green  { background-color: #00E5A0; }
+.color-dot--purple { background-color: #A855F7; }
+.color-dot--pink   { background-color: #F43F5E; }
+
+/* Separator */
+.dock__sep {
+    width: 1px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.12);
+    margin: 0 14px;
+    flex-shrink: 0;
+}
+
+/* Brush sizes */
+.mainhud__brushes {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.brush-dot {
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.45);
+    margin: 0 6px;
+    flex-shrink: 0;
+    transition-property: background-color, scale;
+    transition-duration: 120ms;
+}
+
+.brush-dot:hover {
+    scale: 1.2;
+}
+
+.brush-dot--small  { width: 16px; height: 16px; }
+.brush-dot--medium { width: 26px; height: 26px; }
+.brush-dot--large  { width: 36px; height: 36px; }
+
+.brush-dot--selected {
+    background-color: #00B4D8;
+}
+
+/* Tool buttons */
+.tool-btn {
+    width: 68px;
+    height: 68px;
+    border-radius: 34px;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-width: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    flex-shrink: 0;
+    transition-property: background-color, scale;
+    transition-duration: 120ms;
+}
+
+.tool-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.tool-btn:active {
+    scale: 0.88;
+}
+
+.tool-btn--accent {
+    background-color: rgba(0, 180, 216, 0.25);
+}
+
+.tool-btn--accent:hover {
+    background-color: rgba(0, 180, 216, 0.4);
+}
+
+.tool-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 26px;
+    -unity-text-align: middle-center;
+}
+
+.tool-icon {
+    width: 34px;
+    height: 34px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.tick-icon {
+    background-image: url("project://database/Assets/Resources/MenuIcons/SaveIcon.svg");
+}
+
+/* ── INSPECTOR SUMMON BUTTON ── */
+.inspector__summon-btn {
+    margin-top: 30px;
+    padding: 24px 48px;
+    border-radius: 50px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* Liquid glass borders */
+    background-color: transparent; 
+    border-top-width:    1.5px;
+    border-right-width:  1px;
+    border-bottom-width: 1px;
+    border-left-width:   1px;
+    border-top-color:    rgba(255, 255, 255, 0.65);
+    border-right-color:  rgba(255, 255, 255, 0.22);
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+    border-left-color:   rgba(255, 255, 255, 0.22);
+    transition-property: background-color, scale;
+    transition-duration: 150ms;
+}
+
+.inspector__summon-blur {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50px;
+    border-width: 0;
+}
+
+.inspector__summon-btn:active {
+    scale: 0.95;
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.inspector__summon-text {
+    color: white;
+    font-size: 36px;
+    letter-spacing: 1px;
+    -unity-font: url("project://database/Assets/Fonts/Inter/static/Inter_24pt-Bold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+/* ── AR STATUS (debug overlay) ── */
+.ar-status {
+    position: absolute;
+    top: 180px;
+    left: 32px;
+    right: 32px;
+    padding: 16px 20px;
+    background-color: rgba(255, 50, 50, 0.85);
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+.ar-status--ok {
+    background-color: rgba(0, 180, 100, 0.85);
+}
+
+.ar-status__text {
+    color: white;
+    font-size: 24px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}

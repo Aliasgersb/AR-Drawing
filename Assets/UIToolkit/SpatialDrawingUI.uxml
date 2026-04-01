@@ -1,0 +1,327 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIToolkit/SpatialDrawingUI.uss?fileID=7433441132597879392&amp;guid=ba28bc6b29550b745957c4ffd0a1be23&amp;type=3#SpatialDrawingUI"/>
+    <ui:VisualElement name="root" class="root">
+        <ui:VisualElement name="onboarding-screen" class="screen onboarding">
+
+            <!-- ═══ BACKGROUND GRADIENT ═══ -->
+            <ui:VisualElement name="bg-gradient" picking-mode="Ignore" class="ob__bg" />
+
+            <!-- ═══════════════════════════════════════
+                 PROCEDURAL AR HERO COMPOSITION
+                 Pure USS rings + floating shapes
+                 ═══════════════════════════════════════ -->
+            <ui:VisualElement name="hero-space" picking-mode="Ignore" class="ob__hero-space">
+
+                <!-- Depth layer: soft glow orb behind everything -->
+                <ui:VisualElement class="ob__hero-glow" picking-mode="Ignore" />
+
+                <!-- ARC 1 — Deep purple ring, tilted left -->
+                <ui:VisualElement class="ob__arc-clip ob__arc-clip--1" picking-mode="Ignore">
+                    <ui:VisualElement class="ob__arc ob__arc--purple" picking-mode="Ignore" />
+                </ui:VisualElement>
+
+                <!-- ARC 2 — Coral pink ring, tilted right -->
+                <ui:VisualElement class="ob__arc-clip ob__arc-clip--2" picking-mode="Ignore">
+                    <ui:VisualElement class="ob__arc ob__arc--pink" picking-mode="Ignore" />
+                </ui:VisualElement>
+
+                <!-- ARC 3 — Soft blue ring, upright -->
+                <ui:VisualElement class="ob__arc-clip ob__arc-clip--3" picking-mode="Ignore">
+                    <ui:VisualElement class="ob__arc ob__arc--blue" picking-mode="Ignore" />
+                </ui:VisualElement>
+
+                <!-- ARC 4 — Lavender accent arc, small, offset -->
+                <ui:VisualElement class="ob__arc-clip ob__arc-clip--4" picking-mode="Ignore">
+                    <ui:VisualElement class="ob__arc ob__arc--lavender" picking-mode="Ignore" />
+                </ui:VisualElement>
+
+                <!-- Floating shape: purple sphere -->
+                <ui:VisualElement class="ob__float ob__float--sphere-purple" picking-mode="Ignore" />
+
+                <!-- Floating shape: coral orb -->
+                <ui:VisualElement class="ob__float ob__float--sphere-coral" picking-mode="Ignore" />
+
+                <!-- Floating shape: blue cube -->
+                <ui:VisualElement class="ob__float ob__float--cube-blue" picking-mode="Ignore" />
+
+                <!-- Floating shape: small white dot -->
+                <ui:VisualElement class="ob__float ob__float--dot-white" picking-mode="Ignore" />
+
+                <!-- Floating shape: small lavender dot -->
+                <ui:VisualElement class="ob__float ob__float--dot-lavender" picking-mode="Ignore" />
+
+                <!-- Legacy SVG container (hidden, kept for any C# refs) -->
+                <ui:VisualElement name="hero-svg-container" picking-mode="Ignore" class="ob__hero-svg-container" />
+
+            </ui:VisualElement>
+
+            <!-- ═══ FEATURE PILLS ═══ -->
+            <ui:VisualElement class="ob__pills">
+                <ui:VisualElement class="ob__pill ob__pill--indigo">
+                    <ui:Label text="✦" class="ob__pill-icon ob__pill-icon--indigo" />
+                    <ui:Label text="Spatial" class="ob__pill-text" />
+                </ui:VisualElement>
+                <ui:VisualElement class="ob__pill ob__pill--orange">
+                    <ui:Label text="↗" class="ob__pill-icon ob__pill-icon--orange" />
+                    <ui:Label text="Export" class="ob__pill-text" />
+                </ui:VisualElement>
+                <ui:VisualElement class="ob__pill ob__pill--purple">
+                    <ui:Label text="✎" class="ob__pill-icon ob__pill-icon--purple" />
+                    <ui:Label text="Draw" class="ob__pill-text" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- ═══ TEXT CONTENT ═══ -->
+            <ui:VisualElement name="text-content" class="ob__text-content">
+                <ui:Label text="Draw in&#10;Space" class="ob__title" />
+                <ui:Label text="Create beautiful 3D drawings&#10;around you using AR." class="ob__subtitle" />
+            </ui:VisualElement>
+
+            <!-- ═══ CTA BUTTON ═══ -->
+            <ui:VisualElement class="ob__cta-area">
+                <ui:VisualElement name="btn-start" class="ob__cta">
+                    <ui:Label text="Start Creating" class="ob__cta-text" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+        <ui:VisualElement name="mainhud-screen" class="screen mainhud" style="display: none;">
+            <ui:VisualElement class="mainhud__top-bar">
+                <ui:VisualElement name="btn-gallery" class="mainhud__icon-btn">
+                    <ui:VisualElement class="mainhud__icon-image gallery-icon" />
+                </ui:VisualElement>
+                <ui:VisualElement name="btn-settings" class="mainhud__icon-btn">
+                    <ui:VisualElement class="mainhud__icon-image settings-icon" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement picking-mode="Ignore" class="mainhud__reticle-wrap" style="display: none;">
+                <ui:VisualElement picking-mode="Ignore" class="mainhud__reticle"/>
+            </ui:VisualElement>
+            <ui:VisualElement picking-mode="Ignore" class="spacer"/>
+            <ui:VisualElement class="mainhud__dock" style="display: none;">
+                <ui:VisualElement class="mainhud__colors">
+                    <ui:VisualElement name="color-white" class="color-dot color-dot--white color-dot--selected"/>
+                    <ui:VisualElement name="color-cyan" class="color-dot color-dot--cyan"/>
+                    <ui:VisualElement name="color-orange" class="color-dot color-dot--orange"/>
+                    <ui:VisualElement name="color-green" class="color-dot color-dot--green"/>
+                    <ui:VisualElement name="color-purple" class="color-dot color-dot--purple"/>
+                    <ui:VisualElement name="color-pink" class="color-dot color-dot--pink"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="dock__sep"/>
+                <ui:VisualElement class="mainhud__brushes">
+                    <ui:VisualElement name="brush-small" class="brush-dot brush-dot--small brush-dot--selected"/>
+                    <ui:VisualElement name="brush-medium" class="brush-dot brush-dot--medium"/>
+                    <ui:VisualElement name="brush-large" class="brush-dot brush-dot--large"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="dock__sep"/>
+                <ui:VisualElement name="btn-undo" class="tool-btn">
+                    <ui:Label text="↶" class="tool-label"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="btn-redo" class="tool-btn">
+                    <ui:Label text="↷" class="tool-label"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="btn-save" class="tool-btn tool-btn--accent">
+                    <ui:VisualElement class="tool-icon tick-icon"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="gallery-screen" class="screen gallery" style="display: none;">
+            <ui:VisualElement class="gallery__header">
+                <ui:VisualElement name="btn-gallery-back" class="gallery__back-btn">
+                    <ui:Label text="←" class="gallery__back-icon"/>
+                </ui:VisualElement>
+                <ui:Label text="My Creations" class="gallery__title"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="gallery__search-wrap" picking-mode="Ignore">
+                <ui:Label text="⌕" class="gallery__search-icon" picking-mode="Ignore"/>
+                <ui:Label text="Search your 3D creations..." class="gallery__search-placeholder" picking-mode="Ignore"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="gallery__filters">
+                <ui:VisualElement name="filter-all" class="filter-pill filter-pill--active">
+                    <ui:Label text="All Works" class="filter-pill__text"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="filter-recent" class="filter-pill">
+                    <ui:Label text="Recent" class="filter-pill__text"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="filter-favorites" class="filter-pill">
+                    <ui:Label text="Favorites" class="filter-pill__text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="gallery-scroll" class="gallery__scroll">
+                <ui:VisualElement class="gallery__grid">
+                    <!-- Card Item Template (Cloned Dynamically) -->
+                    <ui:VisualElement name="gallery-card-template" class="gallery__card" style="display: none;">
+                        <ui:VisualElement class="gallery__card-image" style="background-color: rgb(0, 0, 0);">
+                            <ui:VisualElement class="gallery__card-fav" style="display: none;" picking-mode="Ignore">
+                                <ui:Label text="♥" class="gallery__card-fav-icon" picking-mode="Ignore"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:Label text="Drawing Name" class="gallery__card-title" picking-mode="Ignore"/>
+                        <ui:Label text="Date" class="gallery__card-date" picking-mode="Ignore"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="btn-new-drawing" class="gallery__fab">
+                <ui:Label text="+" class="gallery__fab-icon"/>
+                <ui:Label text="New Drawing" class="gallery__fab-text"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="settings-screen" class="screen settings" style="display: none;">
+            <ui:VisualElement name="bg-gradient" picking-mode="Ignore" class="ob__bg" />
+            <ui:VisualElement class="settings__header">
+                <ui:VisualElement name="btn-settings-back" class="settings__back-btn">
+                    <ui:Label text="←" class="settings__back-label"/>
+                </ui:VisualElement>
+                <ui:Label text="Settings" class="settings__title"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="settings__content" usage-hints="DynamicTransform">
+                <ui:Label text="INTERACTION &amp; GESTURES" class="settings__section-label"/>
+                <ui:VisualElement class="settings__card" usage-hints="DynamicTransform">
+                    <ui:VisualElement class="settings__row">
+                        <ui:VisualElement class="settings__row-info" style="flex-grow: 1;">
+                            <ui:VisualElement style="flex-direction: row; align-items: center;">
+                                <ui:Label text="Hand Tracking Sensitivity" class="settings__row-label"/>
+                                <ui:Label name="sensitivity-desc" text="Medium" class="settings__desc-label"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="settings__slider-row">
+                                <ui:Label text="Low" class="settings__slider-label"/>
+                                <ui:VisualElement name="sensitivity-track" class="settings__slider-track">
+                                    <ui:VisualElement class="settings__slider-dots-container">
+                                        <ui:VisualElement class="settings__slider-dot"/>
+                                        <ui:VisualElement class="settings__slider-dot"/>
+                                        <ui:VisualElement class="settings__slider-dot"/>
+                                        <ui:VisualElement class="settings__slider-dot"/>
+                                        <ui:VisualElement class="settings__slider-dot"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="sensitivity-fill" class="settings__slider-fill" style="width: 55%;"/>
+                                    <ui:VisualElement name="sensitivity-thumb" class="settings__slider-thumb" style="left: 55%;"/>
+                                </ui:VisualElement>
+                                <ui:Label text="High" class="settings__slider-label settings__slider-label--right"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="settings__row">
+                        <ui:Label text="Dominant Hand" class="settings__row-label"/>
+                        <ui:VisualElement class="settings__segmented">
+                            <ui:VisualElement name="seg-left" class="settings__segment">
+                                <ui:Label text="Left" class="settings__segment-text"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="seg-right" class="settings__segment settings__segment--active">
+                                <ui:Label text="Right" class="settings__segment-text"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="settings__row settings__row--last">
+                        <ui:Label text="Haptic Feedback" class="settings__row-label"/>
+                        <ui:VisualElement name="toggle-haptics" class="settings__toggle-track settings__toggle-track--on">
+                            <ui:VisualElement class="settings__toggle-thumb"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="VISUALS &amp; AR" class="settings__section-label"/>
+                <ui:VisualElement class="settings__card" usage-hints="DynamicTransform">
+                    <!-- Removed Camera Resolution -->
+                    <ui:VisualElement class="settings__row">
+                        <ui:Label text="Show Tracking Dots" class="settings__row-label"/>
+                        <ui:VisualElement name="toggle-tracking-dots" class="settings__toggle-track">
+                            <ui:VisualElement class="settings__toggle-thumb"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="settings__row">
+                        <ui:Label text="Flashlight / Torch" class="settings__row-label"/>
+                        <ui:VisualElement name="toggle-flashlight" class="settings__toggle-track">
+                            <ui:VisualElement class="settings__toggle-thumb"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="settings__row settings__row--last">
+                        <ui:Label text="Camera Feed Stabilization" class="settings__row-label"/>
+                        <ui:VisualElement name="toggle-stabilization" class="settings__toggle-track">
+                            <ui:VisualElement class="settings__toggle-thumb"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <!-- Removed UI Size Scaling -->
+                </ui:VisualElement>
+                <ui:VisualElement name="btn-how-it-works" class="settings__how-btn">
+                    <ui:Label text="How it works" class="settings__how-text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <!-- 5. INSPECTOR SCREEN -->
+        <ui:VisualElement name="inspector-screen" class="screen" style="display: none; background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement class="mainhud__top-bar">
+                <ui:VisualElement name="btn-inspector-back" class="mainhud__icon-btn">
+                    <ui:Label text="←" style="font-size: 55px; color: white; -unity-text-align: middle-center; margin-top: -10px;"/>
+                </ui:VisualElement>
+                <ui:Label text="View Drawing" class="header-title"/>
+                <ui:VisualElement style="width: 44px;"/>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; justify-content: flex-end; align-items: center; padding-bottom: 40px; pointer-events: none;">
+                <ui:Label text="Drag on space to rotate drawing" style="color: rgba(255, 255, 255, 0.6); font-size: 14px; background-color: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: 20px; pointer-events: none;"/>
+                
+                <!-- NEW SUMMON BUTTON -->
+                <ui:VisualElement name="btn-summon-ar" class="inspector__summon-btn" style="pointer-events: auto;">
+                    <ui:VisualElement class="inspector__summon-blur glass-effect" picking-mode="Ignore" />
+                    <ui:Label text="Summon to AR" class="inspector__summon-text" picking-mode="Ignore" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- GESTURE GUIDE MODAL -->
+        <ui:VisualElement name="gesture-modal-overlay" class="gesture-modal__overlay" style="display: none;">
+            <ui:VisualElement class="gesture-modal__sheet">
+                <ui:VisualElement class="gesture-modal__handle-bar"/>
+                <ui:Label text="How to Use" class="gesture-modal__title"/>
+                <ui:Label text="Everything is controlled by hand gestures — no screen touches needed." class="gesture-modal__subtitle"/>
+
+                <ui:VisualElement class="gesture-modal__row">
+                    <ui:VisualElement class="gesture-modal__row-text">
+                        <ui:Label text="Pinch to Draw" class="gesture-modal__row-label"/>
+                        <ui:Label text="Touch index finger to thumb and move to draw a 3D stroke" class="gesture-modal__row-sub"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="gesture-modal__divider"/>
+
+                <ui:VisualElement class="gesture-modal__row">
+                    <ui:VisualElement class="gesture-modal__row-text">
+                        <ui:Label text="Open Palm = Menu" class="gesture-modal__row-label"/>
+                        <ui:Label text="Hold your open palm facing the camera for 0.3s to open the tool menu" class="gesture-modal__row-sub"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="gesture-modal__divider"/>
+
+                <ui:VisualElement class="gesture-modal__row">
+                    <ui:VisualElement class="gesture-modal__row-text">
+                        <ui:Label text="Index Tap = Cycle" class="gesture-modal__row-label"/>
+                        <ui:Label text="While the menu is open, tap index to thumb to move between options" class="gesture-modal__row-sub"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="gesture-modal__divider"/>
+
+                <ui:VisualElement class="gesture-modal__row">
+                    <ui:VisualElement class="gesture-modal__row-text">
+                        <ui:Label text="Middle Tap = Select" class="gesture-modal__row-label"/>
+                        <ui:Label text="Tap middle finger to thumb to confirm your selection" class="gesture-modal__row-sub"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="gesture-modal__divider"/>
+
+                <ui:VisualElement class="gesture-modal__row">
+                    <ui:VisualElement class="gesture-modal__row-text">
+                        <ui:Label text="Fist = Close Menu" class="gesture-modal__row-label"/>
+                        <ui:Label text="Close your fist or rotate your palm away to dismiss the menu" class="gesture-modal__row-sub"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement name="btn-gesture-modal-close" class="gesture-modal__close-btn">
+                    <ui:Label text="Got it" class="gesture-modal__close-text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
+

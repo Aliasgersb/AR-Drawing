@@ -1,0 +1,11 @@
+[Debug] BuildMainMenu. mainItems: 5, icons: 5
+ItemIndex 0: Type=Color
+ - icons[0] name: ColorIcon
+ItemIndex 1: Type=Thickness
+ - icons[1] name: ThicknessIcon
+ItemIndex 2: Type=Eraser
+ - icons[2] name: EraserIcon
+ItemIndex 3: Type=ClearCanvas
+ - icons[3] name: ClearIcon
+ItemIndex 4: Type=Save
+ - icons[4] name: SaveIconSprite
